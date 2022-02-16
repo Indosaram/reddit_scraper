@@ -56,11 +56,13 @@ class ArchivedReddit:
 
     def download_file(self, url):
         file_name = re.search("(?:.*\/)+(.*\..*)", url).group(1)
-        self.execute(f"wget -4 -O {self.data_dir}/{file_name} {url} ")
+        self.execute(
+            f"wget -4 -O {os.path.join(self.data_dir,file_name)} {url}"
+        )
         # Overwite existing file, remove source file
         command = (
-            f"zstd -f --rm --memory=2048MB  --decompress"
-            " {self.data_dir}/{file_name}"
+            "zstd -f --rm --memory=2048MB  --decompress"
+            f" {os.path.join(self.data_dir,file_name)}"
         )
         self.execute(command)
 

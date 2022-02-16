@@ -13,7 +13,7 @@ class WordAnalyzer:
 
         self.result_dir = result_dir
 
-    def _extract(self, text, num_words):
+    def _extract(self, text):
         print("Extracting frequent words")
         tokens = nltk.word_tokenize(text.lower())
         tagged_tokens = nltk.pos_tag(tokens)
