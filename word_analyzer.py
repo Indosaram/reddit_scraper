@@ -13,7 +13,7 @@ class WordAnalyzer:
 
         self.result_dir = result_dir
 
-    def _extract(self, text):
+    def _extract(self, text, num_words):
         print("Extracting frequent words")
         tokens = nltk.word_tokenize(text.lower())
         tagged_tokens = nltk.pos_tag(tokens)
@@ -25,7 +25,10 @@ class WordAnalyzer:
         ]
 
         freq = nltk.FreqDist(words)
-        frequencies = freq.most_common()
+        if num_words is not None:
+            frequencies = freq.most_common(num_words)
+        else:
+            frequencies = freq.most_common(num_words)
 
         return frequencies
 
@@ -38,7 +41,7 @@ class WordAnalyzer:
         text = " ".join(text)
         return text
 
-    def get_frequency(self, filename, num_words=3):
+    def get_frequency(self, filename, num_words=None):
         text = self._load_csv(filename)
         frequencies = self._extract(text, num_words)
 
@@ -54,7 +57,17 @@ class WordAnalyzer:
         ) as file:
             json.dump(result, file, indent=4)
 
+    def merge_months(self, filenames):
+        for file in os.listdir(self.result_dir):
+            ...
+        # TODO: multiple month trends
+
+
+
 
 if __name__ == '__main__':
     word_analyzer = WordAnalyzer()
-    word_analyzer.get_frequency("data/RS_2020-06.csv")
+
+    files = ["RS_2020-04.csv"]
+    for file in files:
+        word_analyzer.get_frequency(f"data/{file}")

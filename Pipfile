@@ -8,6 +8,8 @@ bs4 = "*"
 pandas = "*"
 tqdm = "*"
 nltk = "*"
+wordcloud = "*"
+seaborn = "*"
 
 [dev-packages]
 ipykernel = "*"
