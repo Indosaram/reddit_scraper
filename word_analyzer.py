@@ -1,8 +1,16 @@
-import os
 import json
+import os
+import ssl
 
 import nltk
 import pandas as pd
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
 
 
 class WordAnalyzer:
@@ -63,11 +71,9 @@ class WordAnalyzer:
         # TODO: multiple month trends
 
 
-
-
 if __name__ == '__main__':
     word_analyzer = WordAnalyzer()
 
-    files = ["RS_2020-04.csv"]
+    files = ["RS_2005-06.csv"]
     for file in files:
         word_analyzer.get_frequency(f"data/{file}")

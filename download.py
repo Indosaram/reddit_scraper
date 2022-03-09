@@ -2,12 +2,12 @@
 Archived data can be downloaded from http://files.pushshift.io/reddit/submissions/
 """
 
-import re
+import json
 import os
+import re
+import subprocess
 from functools import partial
 from multiprocessing import Pool, cpu_count
-import subprocess
-import json
 
 import pandas as pd
 
